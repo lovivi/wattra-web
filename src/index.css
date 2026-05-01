@@ -1,0 +1,168 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: #F0F1F5;
+    background: #0A0C10;
+    overflow: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-weight: 700;
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+  }
+
+  ::selection {
+    background: rgba(0, 229, 204, 0.3);
+    color: #F0F1F5;
+  }
+}
+
+/* ── Typography Scale ── */
+.text-hero {
+  font-size: clamp(3.2rem, 7.5vw, 7rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+}
+
+.text-section {
+  font-size: clamp(2.8rem, 5.5vw, 5rem);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+}
+
+.text-section-lg {
+  font-size: clamp(3.2rem, 6.5vw, 6rem);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+}
+
+.text-body {
+  font-size: clamp(0.95rem, 1.1vw, 1.15rem);
+  line-height: 1.75;
+}
+
+/* ── Spacing Rhythm ── */
+.section-pad {
+  padding: 10vh 7vw 12vh;
+}
+
+@layer components {
+  .section {
+    @apply relative min-h-[100dvh] flex flex-col justify-center overflow-hidden snap-start;
+    padding: 10vh 7vw;
+  }
+
+  .section-inner {
+    @apply relative z-10 w-full max-w-[1100px] mx-auto;
+  }
+
+  .tag {
+    @apply font-mono text-[0.65rem] uppercase tracking-[0.25em] text-wattra-muted mb-6;
+  }
+
+  .tag span {
+    @apply text-wattra-cyan mr-2;
+  }
+
+  /* Section transition line */
+  .section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, transparent, rgba(0,229,204,0.15), transparent);
+    opacity: 0.5;
+  }
+
+  .btn {
+    @apply inline-flex items-center gap-2 px-6 py-3 font-display font-semibold text-[0.8rem] tracking-[0.02em] rounded-[4px] transition-all duration-300;
+  }
+
+  .btn-primary {
+    @apply bg-wattra-cyan text-bg-deep;
+    box-shadow: 0 0 16px rgba(0, 229, 204, 0.12);
+  }
+  .btn-primary:hover {
+    box-shadow: 0 0 28px rgba(0, 229, 204, 0.35);
+    transform: translateY(-2px);
+  }
+
+  .btn-ghost {
+    @apply border border-white/10 text-wattra-sec bg-white/[0.02];
+  }
+  .btn-ghost:hover {
+    @apply border-wattra-cyan/60 text-wattra-cyan bg-wattra-cyan/[0.04];
+  }
+
+  .btn-signal {
+    @apply bg-wattra-signal text-white;
+  }
+  .btn-signal:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+  }
+
+  .accent-line {
+    position: absolute;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, #00E5CC 20%, #00E5CC 80%, transparent);
+    opacity: 0.5;
+  }
+
+  .noise-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .grid-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @media (max-width: 768px) {
+    .section {
+      padding: 8vh 5vw;
+    }
+
+    .text-hero {
+      font-size: clamp(2.5rem, 10vw, 4rem);
+    }
+
+    .text-section {
+      font-size: clamp(2rem, 8vw, 3rem);
+    }
+
+    .text-section-lg {
+      font-size: clamp(2.2rem, 9vw, 3.5rem);
+    }
+  }
+}
